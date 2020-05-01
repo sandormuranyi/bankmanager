@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+    <h:form id="form">
+        <p:dataTable id="singleDT" var="account" value="#{dtAccountSelect.accounts}" selectionMode="single"
+                     selection="#{dtAccountSelect.selectedAccount}" rowKey="#{account.accountNumber}">
+            <f:facet name="header">
+                Számlák
+            </f:facet>
+            <p:column headerText="Számlaszám">
+                <h:outputText value="#{account.accountNumber}"/>
+
+            </p:column>
+            <p:column headerText="Egyenleg">
+                <h:outputText value="#{account.balance}"/>
+            </p:column>
+
+
+            <f:facet name="footer">
+                <p:commandButton disabled="#{empty dtAccountSelect.accounts}" process="singleDT"
+                                 update=":form:accountDetail" icon="ui-icon-search"
+                                 value="Tranzakció" oncomplete="PF('accountDialog').show()"/>
+                <p:commandButton disabled="#{dtAccountSelect.active eq false}" process="singleDT"
+                                 update=":form:newAccount" icon="ui-icon-search" value="Új számla"
+                                 oncomplete="PF('newaccountDialog').show()"/>
+            </f:facet>
+        </p:dataTable>
+
+
+        <p:dialog header="Új számla" widgetVar="newaccountDialog" modal="true" showEffect="fade" hideEffect="fade"
+                  resizable="false">
+            <p:outputPanel id="newAccount" style="text-align:center;">
+                <p:panelGrid columns="4" columnClasses="label,value">
+
+                    <h:outputText value="Új számla"/>
+                    <h:outputText for="val" value="Egyenleg: "/>
+                    <p:inputText id="val" type="number" value="#{dtAccountSelect.cash}"/>
+                    <p:commandButton icon="ui-icon-uptade" value="Létrehozás" action="#{dtAccountSelect.newAccount}"/>
+
+                </p:panelGrid>
+            </p:outputPanel>
+        </p:dialog>
+
+
+        <p:dialog header="Tranzakciók" widgetVar="accountDialog" modal="true" showEffect="fade" hideEffect="fade"
+                  resizable="false">
+            <p:outputPanel id="accountDetail" style="text-align:center;">
+                <p:panelGrid columns="3" rendered="#{not empty dtAccountSelect.selectedAccount}"
+                             columnClasses="label,value">
+
+                    <p:commandButton value="Átutalás" id="sendMoney" action="#{dtAccountSelect.startTransaction(1)}"/>
+                    <p:commandButton value="Befizetés" id="cashin" action="#{dtAccountSelect.startTransaction(2)}"/>
+                    <p:commandButton value="Kifizetés" id="cashout" action="#{dtAccountSelect.startTransaction(3)}"/>
+                </p:panelGrid>
+            </p:outputPanel>
+        </p:dialog>
+
+    </h:form>
+</h:body>
+
+</html>

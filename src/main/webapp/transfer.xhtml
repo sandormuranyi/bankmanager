@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+ <f:metadata>
+    <f:event type="preRenderView" listener="#{transaction.listener}"/>
+ </f:metadata>
+</h:head>
+<body>
+
+	<h:form>
+	    <p:messages id="message" showDetail="true" autoUpdate="true" closable="true" />
+	
+		<p:panel id="panel" header="Atutalas" style="margin-bottom:10px;">
+
+			<h:panelGrid columns="3" cellpadding="5">
+			
+			
+				<p:outputLabel id="ezazid" value="Számlaszám" />
+				<p:outputLabel id="accountNumber" value="#{transaction.account}"/>
+				<p:outputLabel />
+				
+				
+				<p:outputLabel for="destinationAccNo" value="Célszámla" />
+				<p:inputText id="destinationAccNo" required="true" value="#{transaction.destAccount}"/>
+				<p:commandButton id="checkAccount" icon="ui-icon-check" title="Check" action="#{transaction.checkDestination}"/>
+		
+				<p:outputLabel for="val" value="Összeg:" />
+				<p:inputNumber id="val" required="true" value="#{transaction.money}" />
+				<p:outputLabel value="Ft"/>
+				
+				<p:outputLabel for="comment" value="Megjegyzés:" />
+				<p:inputText id="comment" value="#{transaction.comment}" />
+				<p:outputLabel />
+				
+			</h:panelGrid>
+		</p:panel>
+
+
+			<p:commandButton value="Küldés"
+				action="#{transaction.sendMoney}" />
+			<p:commandButton value="Mégse" action="#{transaction.goBack}" immediate="true" />
+
+	</h:form>
+</body>
+</html>

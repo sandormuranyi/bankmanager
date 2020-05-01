@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+	<script>
+function loadDoc(URL) {
+
+	  var baseURL = URL + ".xhtml";
+      $("#pagecontent").load(baseURL);
+
+}
+</script>
+</h:head>
+<h:body>
+
+	<h:form style="margin-bottom:10px;">
+		<p:growl id="messages" />
+
+		<p:menubar>
+			<p:menuitem value="Új ügyfél" icon="ui-icon-document"
+				onclick="loadDoc('adduser')" />
+			<p:menuitem icon="ui-icon-document" value="Jelentés létrehozás"
+				onclick="loadDoc('report')" />
+			<p:menuitem icon="ui-icon-search" value="Ügyfél keresés"
+				onclick="loadDoc('searchU')" />
+
+			<p:menuitem value="Kijelentkezés" icon="ui-icon-extlink"
+				action="#{Login.logout}" />
+
+		</p:menubar>
+	</h:form>
+
+
+	<div id="pagecontent" style="width: 100%; margin: 0 auto;"></div>
+
+
+</h:body>
+
+
+</html>
+
+

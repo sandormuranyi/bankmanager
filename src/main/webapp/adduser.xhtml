@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+
+    <h:form>
+        <p:messages id="usergrowl" showDetail="true" autoUpdate="true" closable="true"/>
+        <p:wizard flowListener="#{userWizard.onFlowProcess}">
+            <p:tab id="Személyes" title="Személyes">
+                <p:panel header="Személyes Adatok">
+
+                    <h:panelGrid columns="2" columnClasses="label, value">
+                        <h:outputText value="Vezetéknév: *"/>
+                        <p:inputText value="#{userWizard.user.firstname}" required="true" label="Firstname"/>
+
+                        <h:outputText value="Keresztnév: *"/>
+                        <p:inputText value="#{userWizard.user.lastname}" required="true" label="Lastname"/>
+
+                        <h:outputText value="Személyigazolvány szám: *"/>
+                        <p:inputText value="#{userWizard.user.personalID}" required="true" label="PersonalId"/>
+
+                    </h:panelGrid>
+                </p:panel>
+            </p:tab>
+
+            <p:tab id="address" title="Cím">
+                <p:panel header="Cím">
+
+                    <h:panelGrid columns="2" columnClasses="label, value">
+
+                        <h:outputText value="Irányítószám: "/>
+                        <p:inputText value="#{userWizard.user.postalCode}" required="true" type="number"/>
+
+                        <h:outputText value="Város: "/>
+                        <p:inputText value="#{userWizard.user.city}" required="true"/>
+
+                        <h:outputText value="Utca: "/>
+                        <p:inputText value="#{userWizard.user.street}" required="true"/>
+
+                    </h:panelGrid>
+                </p:panel>
+            </p:tab>
+
+            <p:tab id="contact" title="Elérhetőség">
+                <p:panel header="Elérhetőség">
+
+                    <h:panelGrid columns="2" columnClasses="label, value">
+
+                        <h:outputText value="Phone: "/>
+                        <p:inputText value="#{userWizard.user.phone}" required="true" type="number"/>
+
+                    </h:panelGrid>
+                </p:panel>
+            </p:tab>
+
+            <p:tab id="confirm" title="Megerősítés">
+                <p:panel header="Megerősítés">
+                    <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            <h:outputText value="Vezetéknév: "/>
+                            <h:outputText value="#{userWizard.user.firstname}" styleClass="outputLabel"/>
+
+                            <h:outputText value="Keresztnév: "/>
+                            <h:outputText value="#{userWizard.user.lastname}" styleClass="outputLabel"/>
+
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="2" columnClasses="label, value">
+
+                            <h:outputText value="Irányítószám: "/>
+                            <h:outputText value="#{userWizard.user.postalCode}" styleClass="outputLabel"/>
+
+                            <h:outputText value="Város "/>
+                            <h:outputText value="#{userWizard.user.city}" styleClass="outputLabel"/>
+
+                            <h:outputText value="Utca: "/>
+                            <h:outputText value="#{userWizard.user.street}" styleClass="outputLabel"/>
+
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="2" columnClasses="label, value">
+
+                            <h:outputText value="Telefonszám: "/>
+                            <h:outputText value="#{userWizard.user.phone}" styleClass="outputLabel"/>
+
+                            <h:outputText/>
+                            <h:outputText/>
+                        </h:panelGrid>
+                    </h:panelGrid>
+
+                    <p:commandButton value="Mentés" actionListener="#{userWizard.save}" update="usergrowl"
+                                     process="@this"/>
+                </p:panel>
+            </p:tab>
+        </p:wizard>
+
+    </h:form>
+
+</h:body>
+</html>

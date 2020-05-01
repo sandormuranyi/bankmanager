@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:p="http://primefaces.org/ui">
+ 
+<h:head>
+ <f:metadata>
+    <f:event type="preRenderView" listener="#{modifyUser.listener}"/>
+ </f:metadata>
+</h:head>
+<h:body>
+ <h:form >
+    <p:panel id="panel" header="Form" style="margin-bottom:10px;">
+       	<p:messages id="message" showDetail="true" autoUpdate="true" closable="true" />
+        <h:panelGrid columns="2" cellpadding="5">
+        	
+ 			<p:outputLabel value="Ügyfélkód" />
+            <p:outputLabel id="userCode" required="true" value="#{modifyUser.userCode}" />
+
+            <p:outputLabel for="firstName" value="Vezetéknév:" />
+            <p:inputText id="firstName" required="true" value="#{modifyUser.firstname}" />
+            
+            <p:outputLabel for="lastName" value="Keresztnév:" />
+            <p:inputText id="lastName" required="true" value="#{modifyUser.lastname}" />
+            
+            <p:outputLabel for="street" value="Utca:" />
+            <p:inputText id="street" required="true" value="#{modifyUser.street}" />
+            
+            <p:outputLabel for="city" value="Város:" />
+            <p:inputText id="city" required="true" value="#{modifyUser.city}" />
+            
+            <p:outputLabel for="postalCode" value="Irányítószm:" />
+            <p:inputText id="postalCode" required="true" value="#{modifyUser.postalCode}" type="number"/>
+            
+            <p:outputLabel for="personalID" value="Személyigazolvány szám:" />
+            <p:inputText id="personalID" required="true" value="#{modifyUser.personalID}" />
+            
+            <p:outputLabel for="phone" value="Telefonszám:" />
+            <p:inputText id="phone" required="true" value="#{modifyUser.phone}" type="number" />
+            
+             <p:outputLabel for="passw" value="Jelszó:" />
+            <p:inputText id="passw" required="true" value="#{modifyUser.pass}" />
+           
+        </h:panelGrid>
+    </p:panel>
+ 
+    <p:commandButton value="Mentés" action="#{modifyUser.modify}" />
+    <p:commandButton value="Mégse" action="#{modifyUser.back}" />
+    <p:commandButton value="Törlés" action="#{modifyUser.delete}" />
+    
+</h:form>          
+</h:body>
+</html>

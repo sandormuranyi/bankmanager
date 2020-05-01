@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:p="http://primefaces.org/ui">
+ 
+<h:head>
+
+</h:head>
+<body>
+<h:form id="form">
+
+      <p:dataTable id="singleDT" var="user" value="#{dtUserSelect.users}" selectionMode="single" selection="#{dtUserSelect.selectedUser}" rowKey="#{user.id}">
+        <f:facet name="header">
+            Ügyféllista
+        </f:facet>
+        <p:column headerText="Ügyfélkód">
+            <h:outputText value="#{user.userCode}" />
+            
+        </p:column>
+        <p:column headerText="Név">
+            <h:outputText value="#{user.firstname} #{user.lastname}" />
+        </p:column>
+        <p:column headerText="Személyigazolvány szám">
+            <h:outputText value="#{user.personalID}" />    
+        </p:column>
+        
+        <f:facet name="footer">
+            <p:commandButton process="singleDT" update=":form:userDetail" icon="ui-icon-search" value="Megtekint" oncomplete="PF('userDialog').show()" />
+        </f:facet>
+    </p:dataTable>
+    
+    <p:dialog header="Műveletek" widgetVar="userDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+        <p:outputPanel id="userDetail" style="text-align:center;">
+            <p:panelGrid  columns="2" rendered="#{not empty dtUserSelect.selectedUser}" columnClasses="label,value">
+           		 <f:facet name="header">
+          			  Ügyfél
+      			  </f:facet>
+      		  
+                <h:outputText value="Ügyfélkód:" />
+                <h:outputText value="#{dtUserSelect.selectedUser.userCode}" />
+ 
+                <h:outputText value="Név:" />
+                <h:outputText value="#{dtUserSelect.selectedUser.firstname} #{dtUserSelect.selectedUser.lastname}" />
+ 
+                <h:outputText value="Személyigazolvány szám: "/>
+                <h:outputText value="#{dtUserSelect.selectedUser.personalID}"/>
+ 
+                <h:outputText value="Lakcím:" />
+                <h:outputText value="#{dtUserSelect.selectedUser.postalCode} , #{dtUserSelect.selectedUser.city} #{dtUserSelect.selectedUser.street}" />
+                                
+                <h:outputText value="Telefonszám:" />
+                <h:outputText value="#{dtUserSelect.selectedUser.phone}" />
+
+				<p:commandButton value="Számlák" id="accounts"  action="#{dtUserSelect.showAccounts}"/>
+				<p:commandButton value="Módosít" id="edit" action="#{dtUserSelect.modify}"  disabled="#{dtUserSelect.selectedUser.active eq false}" />
+			</p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+    
+</h:form>
+</body>
+</html>

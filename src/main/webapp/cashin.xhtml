@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{transaction.listener}"/>
+    </f:metadata>
+</h:head>
+<body>
+
+<h:form>
+    <p:panel id="panel" header="Befizetés" style="margin-bottom:10px;">
+
+        <h:panelGrid columns="3" cellpadding="5">
+
+            <p:outputLabel value="Számlaszám:"/>
+            <p:outputLabel id="accountNumber" required="true" value="#{transaction.account}"/>
+            <p:outputLabel/>
+
+            <p:outputLabel for="value" value="Összeg:"/>
+            <p:inputNumber id="value" required="true" value="#{transaction.money}"/>
+            <p:outputLabel value="Ft"/>
+
+
+        </h:panelGrid>
+    </p:panel>
+
+    <p:commandButton value="Mentes" action="#{transaction.cashIn}"/>
+    <p:commandButton value="Mégse" action="#{transaction.goBack}" immediate="true"/>
+
+</h:form>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+<body>
+<h:form>
+    <p:panel id="panel" header="Keresés" style="margin-bottom:10px;">
+        <p:messages id="message" showDetail="true" autoUpdate="true" closable="true"/>
+
+        <h:panelGrid columns="1" cellpadding="5">
+
+            <p:outputLabel for="firstname" value="Vezetéknév:"/>
+
+            <p:inputText id="firstname" value="#{dtUserSelect.searchfirstName}"/>
+
+            <p:commandButton value="Keresés" action="#{dtUserSelect.searchUsersbyfirstName}"/>
+
+        </h:panelGrid>
+        <h:panelGrid columns="1" cellpadding="5">
+
+
+            <p:outputLabel for="lastname" value="Keresztnév:"/>
+
+            <p:inputText id="lastname" value="#{dtUserSelect.searchlastName}"/>
+            <p:commandButton value="Keresés" action="#{dtUserSelect.searchUsersbylasttName}"/>
+
+        </h:panelGrid>
+        <h:panelGrid columns="1" cellpadding="5">
+            <p:outputLabel for="personalID" value="Személyigazolvány:"/>
+            <p:inputText id="personalID" value="#{dtUserSelect.searchID}"/>
+            <p:commandButton value="Keresés" action="#{dtUserSelect.searchUsersbyPersonalID}"/>
+        </h:panelGrid>
+        <h:panelGrid columns="1" cellpadding="5">
+            <p:outputLabel for="clientID" value="Ügyfélszám"/>
+            <p:inputText id="clientID" value="#{dtUserSelect.searchCID}" type="number"/>
+            <p:commandButton value="Keresés" action="#{dtUserSelect.searchUsersbyCID}"/>
+        </h:panelGrid>
+    </p:panel>
+</h:form>
+</body>
+</html>

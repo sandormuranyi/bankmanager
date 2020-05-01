@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<body>
+<h:form>
+    <p:panel id="panel" header="Jelentés" style="margin-bottom:10px;">
+        <p:messages id="message" showDetail="true" autoUpdate="true" closable="true"/>
+        <h:panelGrid columns="1" cellpadding="5">
+
+            <p:outputLabel for="name" value="Számlaszám:"/>
+            <p:inputText id="name" value="#{report.accountNum}" />
+            <p:commandButton value="Keresés" id="fgas" action="#{report.searchByAccountNum}"/>
+        </h:panelGrid>
+        <h:panelGrid columns="1" cellpadding="5">
+            <p:outputLabel for="val" value="Összeg (-tól, -ig):"/>
+            <p:inputText value="#{report.fromMoney}" id="val" type="number"/>
+            <p:inputText value="#{report.toMoney}"  type="number"/>
+            <p:commandButton value="Keresés" id="gas" action="#{report.searchByAmount}"/>
+        </h:panelGrid>
+        <h:panelGrid columns="1" cellpadding="5">
+
+            <p:outputLabel for="date" value="Dátumtól máig:"/>
+            <p:calendar id="date" value="#{report.date}" locale="de" navigator="true">
+                <p:ajax event="dateSelect" listener="#{report.dateSelectedAction}"></p:ajax>
+            </p:calendar>
+            <p:commandButton value="Keresés" id="searchDate" action="#{report.searchByDate}"/>
+
+        </h:panelGrid>
+        <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+            <p:panelGrid id="display" columns="2" columnClasses="label,value">
+                <h:outputText value="Date:"/>
+                <h:outputText value="#{report.fromDate}"/>
+            </p:panelGrid>
+        </p:dialog>
+
+    </p:panel>
+</h:form>
+</body>
+</html>
